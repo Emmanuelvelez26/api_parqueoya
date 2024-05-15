@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>SpringSeecurityAppApplication.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+SpringSeecurityAppApplication.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">persistence</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">PermissionEntity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">persistence</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">RoleEntity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">persistence</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">RoleEnum</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">persistence</span><span class="s2">.</span><span class="s1">entity</span><span class="s2">.</span><span class="s1">UserEntity</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">com</span><span class="s2">.</span><span class="s1">app</span><span class="s2">.</span><span class="s1">persistence</span><span class="s2">.</span><span class="s1">repository</span><span class="s2">.</span><span class="s1">UserRepository</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">boot</span><span class="s2">.</span><span class="s1">CommandLineRunner</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">boot</span><span class="s2">.</span><span class="s1">SpringApplication</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">boot</span><span class="s2">.</span><span class="s1">autoconfigure</span><span class="s2">.</span><span class="s1">SpringBootApplication</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">org</span><span class="s2">.</span><span class="s1">springframework</span><span class="s2">.</span><span class="s1">context</span><span class="s2">.</span><span class="s1">annotation</span><span class="s2">.</span><span class="s1">Bean</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">Set</span><span class="s2">;</span>
+
+<span class="s1">@SpringBootApplication</span>
+<span class="s0">public class </span><span class="s1">SpringSeecurityAppApplication </span><span class="s2">{</span>
+
+    <span class="s0">public static void </span><span class="s1">main</span><span class="s2">(</span><span class="s1">String</span><span class="s2">[] </span><span class="s1">args</span><span class="s2">) {</span>
+        <span class="s1">SpringApplication</span><span class="s2">.</span><span class="s1">run</span><span class="s2">(</span><span class="s1">SpringSeecurityAppApplication</span><span class="s2">.</span><span class="s0">class</span><span class="s2">, </span><span class="s1">args</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s1">@Bean</span>
+    <span class="s1">CommandLineRunner init</span><span class="s2">(</span><span class="s1">UserRepository userRepository</span><span class="s2">) {</span>
+        <span class="s0">return </span><span class="s1">args -&gt; </span><span class="s2">{</span>
+            <span class="s3">/* Create PERMISSIONS */</span>
+            <span class="s1">PermissionEntity createPermission </span><span class="s2">= </span><span class="s1">PermissionEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s4">&quot;CREATE&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">PermissionEntity readPermission </span><span class="s2">= </span><span class="s1">PermissionEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s4">&quot;READ&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">PermissionEntity updatePermission </span><span class="s2">= </span><span class="s1">PermissionEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s4">&quot;UPDATE&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">PermissionEntity deletePermission </span><span class="s2">= </span><span class="s1">PermissionEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s4">&quot;DELETE&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">PermissionEntity refactorPermission </span><span class="s2">= </span><span class="s1">PermissionEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">name</span><span class="s2">(</span><span class="s4">&quot;REFACTOR&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s3">/* Create ROLES */</span>
+            <span class="s1">RoleEntity roleAdmin </span><span class="s2">= </span><span class="s1">RoleEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">roleEnum</span><span class="s2">(</span><span class="s1">RoleEnum</span><span class="s2">.</span><span class="s1">ADMIN</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">permissionList</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">createPermission</span><span class="s2">, </span><span class="s1">readPermission</span><span class="s2">, </span><span class="s1">updatePermission</span><span class="s2">, </span><span class="s1">deletePermission</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">RoleEntity roleUser </span><span class="s2">= </span><span class="s1">RoleEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">roleEnum</span><span class="s2">(</span><span class="s1">RoleEnum</span><span class="s2">.</span><span class="s1">VIGILANTE</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">permissionList</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">createPermission</span><span class="s2">, </span><span class="s1">readPermission</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+
+
+            <span class="s1">RoleEntity roleDeveloper </span><span class="s2">= </span><span class="s1">RoleEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">roleEnum</span><span class="s2">(</span><span class="s1">RoleEnum</span><span class="s2">.</span><span class="s1">DEVELOPER</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">permissionList</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">createPermission</span><span class="s2">, </span><span class="s1">readPermission</span><span class="s2">, </span><span class="s1">updatePermission</span><span class="s2">, </span><span class="s1">deletePermission</span><span class="s2">, </span><span class="s1">refactorPermission</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s3">/* CREATE USERS */</span>
+            <span class="s1">UserEntity userSantiago </span><span class="s2">= </span><span class="s1">UserEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">username</span><span class="s2">(</span><span class="s4">&quot;santiago&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">password</span><span class="s2">(</span><span class="s4">&quot;$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">isEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoLocked</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">credentialNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">roles</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">roleAdmin</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">UserEntity userDaniel </span><span class="s2">= </span><span class="s1">UserEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">username</span><span class="s2">(</span><span class="s4">&quot;daniel&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">password</span><span class="s2">(</span><span class="s4">&quot;$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">isEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoLocked</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">credentialNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">roles</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">roleUser</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+
+            <span class="s1">UserEntity userAnyi </span><span class="s2">= </span><span class="s1">UserEntity</span><span class="s2">.</span><span class="s1">builder</span><span class="s2">()</span>
+                    <span class="s2">.</span><span class="s1">username</span><span class="s2">(</span><span class="s4">&quot;anyi&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">password</span><span class="s2">(</span><span class="s4">&quot;$2a$10$cMY29RPYoIHMJSuwRfoD3eQxU1J5Rww4VnNOUOAEPqCBshkNfrEf6&quot;</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">isEnabled</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">accountNoLocked</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">credentialNoExpired</span><span class="s2">(</span><span class="s0">true</span><span class="s2">)</span>
+                    <span class="s2">.</span><span class="s1">roles</span><span class="s2">(</span><span class="s1">Set</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">roleDeveloper</span><span class="s2">))</span>
+                    <span class="s2">.</span><span class="s1">build</span><span class="s2">();</span>
+
+            <span class="s1">userRepository</span><span class="s2">.</span><span class="s1">saveAll</span><span class="s2">(</span><span class="s1">List</span><span class="s2">.</span><span class="s1">of</span><span class="s2">(</span><span class="s1">userSantiago</span><span class="s2">, </span><span class="s1">userDaniel</span><span class="s2">, </span><span class="s1">userAnyi</span><span class="s2">));</span>
+        <span class="s2">};</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
